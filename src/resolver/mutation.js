@@ -25,6 +25,18 @@ const Mutation = {
       const response = await AuthServices.resendOtp(req)
       return response
     },
+    updateUser: async (args, req) => {
+      const response = await AuthServices.updateUser(req)
+      return response
+    },
+    forgotPassword: async (args, req) => {
+      const response = await AuthServices.forgotPassword(req)
+      return response
+    },
+    OtpVerify_Email: async (args, req) => {
+      const response = await AuthServices.OtpVerify_Email(req)
+      return response
+    },
   };
 
   module.exports = {
