@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma.schema
+
+model Animal {
+  id   String @id @unique @default(uuid()) @db.Uuid
+  name String @unique
+  fact String
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  password String?
+  isVerified Boolean  @default(false)
+}
+
+model Token {
+  id      Int  @id @default(autoincrement())
+  userId  Int?  @unique
+  token   String  @default("")
+  createdAt  DateTime   @default(now())
+}
+

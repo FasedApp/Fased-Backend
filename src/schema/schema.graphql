@@ -1,0 +1,42 @@
+scalar Date
+
+# schema.graphql
+type Animal {
+  id: ID!
+  name: String!
+  fact: String
+}
+
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    password: String!
+    isVerified: Boolean
+}
+
+
+type Token {
+  id:      Int  
+  userId:  Int
+  token:   String 
+  createdAt:  Date
+}
+
+
+type Query {
+  getAllAnimals: [Animal]
+  getAllUsers: [User]
+  loginUser(email: String, password: String): User!
+}
+
+type Mutation {
+    addUser(email: String!, name: String, password: String): User
+    changePassword(id: Int!, currentPassword: String!, newPassword: String!): User
+    deleteUser(id: Int!): [User]
+    verifyOtp(token: String!, email: String!): User
+    resendOtp(email: String!): User
+}
+
+
+
