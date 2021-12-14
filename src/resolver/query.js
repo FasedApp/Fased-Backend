@@ -13,6 +13,7 @@ const Query = {
         const response = await prisma.user.findMany()
         return response
     },
+    
 }
 
 module.exports = {

@@ -15,6 +15,12 @@ type User {
     isVerified: Boolean
 }
 
+type SuccessType {
+  status: Boolean
+  message: String
+  data: User
+}
+
 
 type Token {
   id:      Int  
@@ -28,14 +34,18 @@ type Query {
   getAllAnimals: [Animal]
   getAllUsers: [User]
   loginUser(email: String, password: String): User!
+
 }
 
 type Mutation {
     addUser(email: String!, name: String, password: String): User
     changePassword(id: Int!, currentPassword: String!, newPassword: String!): User
     deleteUser(id: Int!): [User]
-    verifyOtp(token: String!, email: String!): User
+    verifyOtp(token: String!, email: String!): SuccessType
     resendOtp(email: String!): User
+    updateUser(id: Int!, email: String!,  name: String): User
+    forgotPassword(email: String!): SuccessType
+    OtpVerify_Email(token: String!):SuccessType
 }
 
 
