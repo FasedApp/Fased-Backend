@@ -17,6 +17,7 @@
     "nodemon": "^2.0.13"
   },
   "devDependencies": {
-    "prisma": "^3.6.0"
+    "prisma": "^3.6.0",
+    "rimraf": "^3.0.2"
   }
 }

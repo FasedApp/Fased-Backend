@@ -19,17 +19,39 @@ model Animal {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  password String?
-  isVerified Boolean  @default(false)
+  id         Int     @id @default(autoincrement())
+  email      String  @unique
+  name       String?
+  password   String?
+  isVerified Boolean @default(false)
 }
 
 model Token {
-  id      Int  @id @default(autoincrement())
-  userId  Int?  @unique
-  token   String  @default("")
-  createdAt  DateTime   @default(now())
+  id        Int      @id @default(autoincrement())
+  userId    Int?     @unique
+  token     String   @default("")
+  createdAt DateTime @default(now())
 }
 
+model Category {
+  id         Int      @id @default(autoincrement())
+  Image      String?
+  Heading    String?
+  SubHeading String?
+  createdAt  DateTime @default(now())
+  Report     Report[]
+}
+
+model Report {
+  id           Int      @id @default(autoincrement())
+  Category     Category @relation(fields: [SubCategory], references: [id])
+  CategoryId   Int
+  SubCategory  Int
+  latitude     Float
+  longitude    Float
+  IncidentDate DateTime
+  SuspectName  String
+  CostMoney    Int
+  Description  String
+  createdAt    DateTime @default(now())
+}
