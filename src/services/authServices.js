@@ -7,6 +7,7 @@ const { signAccessToken } = require("../utils/jwt.js");
 const SendMail = require("./emailServices.js");
 
 const AuthServices = {
+
   async createUser(data) {
     const user = await prisma.user.findUnique({
       where: { email: data.email },

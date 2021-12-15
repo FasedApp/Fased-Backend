@@ -8,11 +8,11 @@ type Animal {
 }
 
 type User {
-    id: ID!
-    email: String!
-    name: String!
-    password: String!
-    isVerified: Boolean
+  id: ID!
+  email: String!
+  name: String!
+  password: String!
+  isVerified: Boolean
 }
 
 type SuccessType {
@@ -21,32 +21,52 @@ type SuccessType {
   data: User
 }
 
-
-type Token {
-  id:      Int  
-  userId:  Int
-  token:   String 
-  createdAt:  Date
+type Category {
+  id: Int
+  Image: String
+  Heading: String
+  SubHeading: String
+  createdAt: Date
+  Report: Report
 }
 
+type Report {
+  id: Int
+  userId: Int
+  Category: Category
+  CategoryId: Int
+  SubCategory: Int
+  latitude: Float
+  longitude: Float
+  IncidentDate: Date
+  SuspectName: String
+  CostMoney: Int
+  Description: String
+  createdAt: Date
+}
+
+type Token {
+  id: Int
+  userId: Int
+  token: String
+  createdAt: Date
+}
 
 type Query {
   getAllAnimals: [Animal]
   getAllUsers: [User]
   loginUser(email: String, password: String): User!
-
 }
 
 type Mutation {
-    addUser(email: String!, name: String, password: String): User
-    changePassword(id: Int!, currentPassword: String!, newPassword: String!): User
-    deleteUser(id: Int!): [User]
-    verifyOtp(token: String!, email: String!): SuccessType
-    resendOtp(email: String!): User
-    updateUser(id: Int!, email: String!,  name: String): User
-    forgotPassword(email: String!): SuccessType
-    OtpVerify_Email(token: String!):SuccessType
+  addUser(email: String!, name: String, password: String): User
+  changePassword(id: Int!, currentPassword: String!, newPassword: String!): User
+  deleteUser(id: Int!): [User]
+  verifyOtp(token: String!, email: String!): SuccessType
+  resendOtp(email: String!): User
+  updateUser(id: Int!, email: String!, name: String): User
+  forgotPassword(email: String!): SuccessType
+  OtpVerify_Email(token: String!): SuccessType
+  CreateReport(id:Int!,userId:Int!,Category:String!,CategoryId:Int!,SubCategory:String!,latitude:Float!,longitude:Float!,IncidentDate:String!,SuspectName:String!,CostMoney:Int!,Description:String!):SuccessType
+  CreateCatagory(id:Int!,Image:String!,Hdeading:String!,SubHeading:String!):SuccessType
 }
-
-
-
