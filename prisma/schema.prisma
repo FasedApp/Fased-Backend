@@ -34,12 +34,13 @@ model Token {
 }
 
 model Category {
-  id         Int      @id @default(autoincrement())
-  Image      String?
-  Heading    String?
-  SubHeading String?
-  createdAt  DateTime @default(now())
-  Report     Report[]
+  id              Int      @id @default(autoincrement())
+  Image           String?
+  Title           String?
+  Description     String?
+  BackgroundColor String?
+  createdAt       DateTime @default(now())
+  Report          Report[]
 }
 
 model Report {
@@ -47,9 +48,10 @@ model Report {
   Category     Category @relation(fields: [SubCategory], references: [id])
   CategoryId   Int
   SubCategory  Int
+  userId       Int
   latitude     Float
   longitude    Float
-  IncidentDate DateTime
+  IncidentDate DateTime @default(now())
   SuspectName  String
   CostMoney    Int
   Description  String

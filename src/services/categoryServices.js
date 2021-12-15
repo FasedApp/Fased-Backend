@@ -3,12 +3,16 @@ require("dotenv").config();
 const createError = require("http-errors");
 
 const CategoryServices = {
-  async CreateReport(data) {
+  async CreateCatagory(data) {
     try {
-      const UserExist = await prisma.report.create({
+      const UserExist = await prisma.category.create({
         data: data,
       });
-      return UserExist;
+      return {
+        data: null,
+        status: true,
+        message: "Category Create Successfully",
+      };
     } catch (error) {
       return createError(401, error);
     }

@@ -5,6 +5,7 @@ const createError = require("http-errors");
 const crypto = require("crypto");
 const { signAccessToken } = require("../utils/jwt.js");
 const SendMail = require("./emailServices.js");
+const { createResponse } = require("../utils/HelperFuntions.js");
 
 const AuthServices = {
 
@@ -29,7 +30,7 @@ const AuthServices = {
         },
       });
       SendMail(responseData.email, token.toString("hex"));
-      return responseData;
+      return createResponse(responseData, true, "User Created Successfully");
     } catch (error) {
       return createError(401, error);
     }
@@ -56,7 +57,7 @@ const AuthServices = {
       where: { id: userExist.id },
       data: { isVerified: true },
     });
-    return { data: userData, status: true, message: "Account is now verified" };
+    return createResponse(userData, true, "Account is now verified");
   },
 
   async resendOtp(data) {
@@ -76,11 +77,7 @@ const AuthServices = {
       },
     });
 
-    return {
-      ...userExist,
-      status: true,
-      message: "otp is resend to your email",
-    };
+    return createResponse(userExist, true, "otp is resend to your email");
   },
 
   async loginUser(data) {
@@ -94,8 +91,8 @@ const AuthServices = {
     // if (!userExist.isVerified)
     //   return createError("401", "Please Verify your account");
 
-    delete userExist.password;
-    return { ...userExist, status: true, message: "Signin Successful" };
+    userExist.password = "******";
+    return createResponse(userExist, true, "Signin Successful");
   },
 
   async changePassword(data) {
@@ -122,7 +119,7 @@ const AuthServices = {
           password: newPassword,
         },
       });
-      return responseData;
+      return createResponse(responseData, true, "Password Change Successfully");
     } catch (error) {
       return createError(401, error);
     }
@@ -164,7 +161,7 @@ const AuthServices = {
       data: data,
     });
     updatedUser.password = "*******";
-    return updatedUser;
+    return createResponse(updatedUser, true, "User Update Successfully");
   },
 
   async forgotPassword(data) {
@@ -190,7 +187,7 @@ const AuthServices = {
       },
     });
     SendMail(data.email, token.toString("hex"));
-    return { data: null, status: true, message: "Otp Send to your Email" };
+    return createResponse(data, true, "Otp Send to your Email");
   },
 
   async OtpVerify_Email(data) {
@@ -198,7 +195,6 @@ const AuthServices = {
       where: { email: data.email },
     });
     if (!userExist) return createError("404", "User Not Found!");
-
     const verifyOtp = await prisma.token.findFirst({
       where: {
         userId: userExist.id,
@@ -209,10 +205,8 @@ const AuthServices = {
     var diff = Math.abs(new Date(verifyOtp.createdAt) - new Date());
     var minutes = Math.floor(diff / 1000 / 60);
     if (minutes >= 2) return createError("401", "Otp is expired");
-    const userData = await prisma.user.update({
-      where: { id: userExist.id },
-    });
-    return { data: null, status: true, message: "Otp Verified Successfully" };
+ 
+    return createResponse(data, true, "Otp Verified Successfully");
   },
 
   async newPassword(data) {
@@ -233,7 +227,7 @@ const AuthServices = {
           password: newPassword,
         },
       });
-      return responseData;
+      return createResponse(data, true, "Password Changed Successfully");
     } catch (error) {
       return createError(401, error);
     }

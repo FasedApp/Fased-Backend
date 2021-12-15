@@ -12,9 +12,14 @@ const ReportServices = {
       const responseData = await prisma.report.create({
         data: data,
       });
-      return responseData;
+       return {
+        data: null,
+        status: true,
+        message: "Incident Reported Successfully",
+      };
     } catch (error) {
       return createError(401, error);
+      
     }
   },
 };
