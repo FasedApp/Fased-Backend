@@ -55,18 +55,19 @@ type Token {
 type Query {
   getAllAnimals: [Animal]
   getAllUsers: [User]
-  loginUser(email: String, password: String): User!
+  loginUser(email: String, password: String): SuccessType!
 }
 
 type Mutation {
-  addUser(email: String!, name: String, password: String): User
-  changePassword(id: Int!, currentPassword: String!, newPassword: String!): User
+  addUser(email: String!, name: String, password: String): SuccessType
+  changePassword(id: Int!, currentPassword: String!, newPassword: String!): SuccessType
   deleteUser(id: Int!): [User]
   verifyOtp(token: String!, email: String!): SuccessType
-  resendOtp(email: String!): User
-  updateUser(id: Int!, email: String!, name: String): User
+  resendOtp(email: String!): SuccessType
+  updateUser(id: Int!, email: String!, name: String): SuccessType
   forgotPassword(email: String!): SuccessType
-  OtpVerify_Email(token: String!): SuccessType
-  CreateReport(id:Int!,userId:Int!,Category:String!,CategoryId:Int!,SubCategory:String!,latitude:Float!,longitude:Float!,IncidentDate:String!,SuspectName:String!,CostMoney:Int!,Description:String!):SuccessType
-  CreateCatagory(id:Int!,Image:String!,Hdeading:String!,SubHeading:String!):SuccessType
+  OtpVerify_Email(token: String!, email: String!): SuccessType
+  NewPassword(password: String!, email: String!): SuccessType
+  CreateReport(userId:Int!,CategoryId:Int!,SubCategory:Int!,latitude:Float!,longitude:Float!,SuspectName:String!,CostMoney:Int!,Description:String!):SuccessType
+  CreateCatagory(Image:String!,Title:String!,Description:String!,BackgroundColor:String!):SuccessType
 }

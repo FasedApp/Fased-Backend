@@ -5,6 +5,7 @@ const jwt = require('../utils/jwt');
 const createError = require('http-errors');
 const AuthServices = require("../services/authServices.js");
 const ReportServices = require("../services/reportServices.js");
+const CategoryServices = require("../services/categoryServices.js");
 
 const Mutation = {
     addUser: async (args, req) => { 
@@ -39,6 +40,10 @@ const Mutation = {
       const response = await AuthServices.OtpVerify_Email(req)
       return response
     },
+    NewPassword: async (args, req) => {
+      const response = await AuthServices.newPassword(req)
+      return response
+    },
 
 
 
@@ -47,8 +52,11 @@ const Mutation = {
       const response = await ReportServices.CreateReport(req)
       return response
     },
+
+
+    // CATEGORY SERVICES
     CreateCatagory: async (args, req) => {
-      const response = await ReportServices.CreateCatagory(req)
+      const response = await CategoryServices.CreateCatagory(req)
       return response
     },
   };
