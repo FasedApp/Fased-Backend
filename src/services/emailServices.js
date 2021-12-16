@@ -4,13 +4,22 @@ const SendMail = (toUser, otp) => {
     const nodemailer = require('nodemailer');
 
     let transporter = nodemailer.createTransport({
-        host: "smtp.mailtrap.io",
+        // host: "smtp.office365.com",
+        service: "outlook",
         port: 2525,
         auth: {
-            user: "d4b59f0c323fe1",
-            pass: "749b8c78df003e"
+            user: "mudassir.raza@techstirr.com",
+            pass: "Mudassir@2021"
         }
     })
+
+    // transporter.verify(function (error, success) {
+    //     if (error) {
+    //         console.log(error);
+    //     } else {
+    //         console.log("Server is ready to take our messages");
+    //     }
+    // });
 
     message = {
         from: "mudassir.raza@techstirr.com",

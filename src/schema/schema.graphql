@@ -24,8 +24,9 @@ type SuccessType {
 type Category {
   id: Int
   Image: String
-  Heading: String
-  SubHeading: String
+  Title: String
+  Description: String
+  BackgroundColor: String
   createdAt: Date
   Report: Report
 }
@@ -52,22 +53,90 @@ type Token {
   createdAt: Date
 }
 
+type ReportReponse {
+  status: Boolean
+  message: String
+  data: Report
+}
+
+type CategoryResponse {
+  status: Boolean
+  message: String
+  data: Category
+}
+
 type Query {
   getAllAnimals: [Animal]
   getAllUsers: [User]
+  getReports: [Report]
+  getCategories: [Category]
   loginUser(email: String, password: String): SuccessType!
 }
 
 type Mutation {
+  # AUTH MUTATIONS
   addUser(email: String!, name: String, password: String): SuccessType
-  changePassword(id: Int!, currentPassword: String!, newPassword: String!): SuccessType
-  deleteUser(id: Int!): [User]
-  verifyOtp(token: String!, email: String!): SuccessType
-  resendOtp(email: String!): SuccessType
-  updateUser(id: Int!, email: String!, name: String): SuccessType
+
   forgotPassword(email: String!): SuccessType
+
   OtpVerify_Email(token: String!, email: String!): SuccessType
+
+  # verifyOtp(token: String!, email: String!): SuccessType
+  resendOtp(email: String!): SuccessType
+
   NewPassword(password: String!, email: String!): SuccessType
-  CreateReport(userId:Int!,CategoryId:Int!,SubCategory:Int!,latitude:Float!,longitude:Float!,SuspectName:String!,CostMoney:Int!,Description:String!):SuccessType
-  CreateCatagory(Image:String!,Title:String!,Description:String!,BackgroundColor:String!):SuccessType
+
+  changePassword(
+    id: Int!
+    currentPassword: String!
+    newPassword: String!
+  ): SuccessType
+  deleteUser(id: Int!): [User]
+
+  updateUser(id: Int!, email: String!, name: String): SuccessType
+
+  # REPORTS MUTAIONS
+  CreateReport(
+    userId: Int!
+    CategoryId: Int!
+    SubCategory: Int!
+    latitude: Float!
+    longitude: Float!
+    SuspectName: String!
+    CostMoney: Int!
+    IncidentDate: Date
+    Description: String!
+  ): ReportReponse
+
+  EditReport(
+    id: Int!
+    CategoryId: Int
+    SubCategory: Int
+    latitude: Float
+    longitude: Float
+    IncidentDate: Date
+    SuspectName: String
+    CostMoney: Int
+    Description: String
+  ): ReportReponse
+
+  deleteReport(id: Int!): [Report]
+
+  # REPORT MUTATIONS
+  CreateCatagory(
+    Image: String!
+    Title: String!
+    Description: String!
+    BackgroundColor: String!
+  ): CategoryResponse
+
+  EditCategory(
+    id: Int!
+    Image: String
+    Title: String
+    Description: String
+    BackgroundColor: String
+  ): CategoryResponse
+
+  deleteCategory(id: Int!): [Category]
 }

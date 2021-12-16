@@ -8,6 +8,8 @@ const ReportServices = require("../services/reportServices.js");
 const CategoryServices = require("../services/categoryServices.js");
 
 const Mutation = {
+
+    // AUTH SERVICES
     addUser: async (args, req) => { 
       const response = await AuthServices.createUser(req)     
       return response 
@@ -20,10 +22,10 @@ const Mutation = {
       const response = await AuthServices.deleteUser(req)
       return response
     },
-    verifyOtp: async (args, req) => {
-      const response = await AuthServices.verifyOtp(req)
-      return response
-    },
+    // verifyOtp: async (args, req) => {
+    //   const response = await AuthServices.verifyOtp(req)
+    //   return response
+    // },
     resendOtp: async (args, req) => {
       const response = await AuthServices.resendOtp(req)
       return response
@@ -52,11 +54,27 @@ const Mutation = {
       const response = await ReportServices.CreateReport(req)
       return response
     },
+    EditReport: async (args, req) => {
+      const response = await ReportServices.EditReport(req)
+      return response
+    },
+    deleteReport: async (args, req) => {
+      const response = await ReportServices.deleteReport(req)
+      return response
+    }, 
 
 
     // CATEGORY SERVICES
     CreateCatagory: async (args, req) => {
       const response = await CategoryServices.CreateCatagory(req)
+      return response
+    },
+    EditCategory: async (args, req) => {
+      const response = await CategoryServices.EditCategory(req)
+      return response
+    },
+    deleteCategory: async (args, req) => {
+      const response = await CategoryServices.deleteCategory(req)
       return response
     },
   };
