@@ -8,20 +8,21 @@ const { resolvers } = require('./src/resolver')
 
 
 
-  const server = new ApolloServer({
-    typeDefs: readFileSync(
-      path.join(__dirname, './src/schema/schema.graphql'),
-      'utf8'
-    ),
-    resolvers,
-    context: {
-      prisma,
-    },
-  })
+const server = new ApolloServer({
+  typeDefs: readFileSync(
+    path.join(__dirname, './src/schema/schema.graphql'),
+    'utf8'
+  ),
+  resolvers,
+  context: {
+    prisma,
+  },
+  introspection: true
+})
 
 server
   .listen(process.env.PORT || 3000)
-  .then(({ url }) => 
+  .then(({ url }) =>
     console.log(`Server is running on ${url}`)
   )
 
