@@ -15,12 +15,6 @@ type User {
   isVerified: Boolean
 }
 
-type SuccessType {
-  status: Boolean
-  message: String
-  data: User
-}
-
 type Category {
   id: Int
   Image: String
@@ -53,6 +47,28 @@ type Token {
   createdAt: Date
 }
 
+type News {
+  id: Int
+  Image: String
+  Title: String
+  Tagline: String
+  Description: String
+  createdAt: Date
+}
+
+type Favorites {
+  id: Int
+  userId: Int
+  newsId: Int
+  createdAt: Date
+}
+
+type SuccessType {
+  status: Boolean
+  message: String
+  data: User
+}
+
 type ReportReponse {
   status: Boolean
   message: String
@@ -65,34 +81,35 @@ type CategoryResponse {
   data: Category
 }
 
+type NewsResponse {
+  status: Boolean
+  message: String
+  data: News
+}
+
 type Query {
   getAllAnimals: [Animal]
+  loginUser(email: String, password: String): SuccessType!
   getAllUsers: [User]
   getReports: [Report]
   getCategories: [Category]
-  loginUser(email: String, password: String): SuccessType!
+  getNews: [News]
 }
 
 type Mutation {
   # AUTH MUTATIONS
   addUser(email: String!, name: String, password: String): SuccessType
-
   forgotPassword(email: String!): SuccessType
-
   OtpVerify_Email(token: String!, email: String!): SuccessType
-
   # verifyOtp(token: String!, email: String!): SuccessType
   resendOtp(email: String!): SuccessType
-
   NewPassword(password: String!, email: String!): SuccessType
-
   changePassword(
     id: Int!
     currentPassword: String!
     newPassword: String!
   ): SuccessType
   deleteUser(id: Int!): [User]
-
   updateUser(id: Int!, email: String!, name: String): SuccessType
 
   # REPORTS MUTAIONS
@@ -139,4 +156,22 @@ type Mutation {
   ): CategoryResponse
 
   deleteCategory(id: Int!): [Category]
+
+
+  # NEW MUTATIONS
+  CreateNews(
+    Image: String!
+    Title: String!
+    Tagline: String!
+    Description: String!
+  ): NewsResponse
+
+  EditNews(
+    id: Int!
+    Image: String
+    Title: String
+    Tagline: String
+    Description: String
+  ): NewsResponse
+  deleteNews(id: Int!): [News]
 }

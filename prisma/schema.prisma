@@ -57,3 +57,19 @@ model Report {
   Description  String
   createdAt    DateTime @default(now())
 }
+
+model News {
+  id          Int      @id @default(autoincrement())
+  Image       String?
+  Title       String?
+  Tagline     String?
+  Description String?
+  createdAt   DateTime @default(now())
+}
+
+model Favorites {
+  id          Int      @id @default(autoincrement())
+  userId      Int?
+  newsId      Int?
+  createdAt   DateTime @default(now())
+}

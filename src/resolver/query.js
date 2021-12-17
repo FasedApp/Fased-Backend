@@ -26,6 +26,13 @@ const Query = {
     getCategories: async (args, req) => {
         const response = await prisma.category.findMany()
         return response
+    },
+
+
+    // NEW QUERIES
+    getNews: async (args, req) => {
+        const response = await prisma.news.findMany()
+        return response
     }
     
 }
