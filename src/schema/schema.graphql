@@ -1,11 +1,5 @@
 scalar Date
 
-# schema.graphql
-type Animal {
-  id: ID!
-  name: String!
-  fact: String
-}
 
 type User {
   id: ID!
@@ -88,14 +82,49 @@ type NewsResponse {
   data: News
 }
 
+type FavoriteResponse {
+  status: Boolean
+  message: String
+  data: [Favorites],
+}
+
+type ArrayUserResponse {
+  status: Boolean
+  message: String
+  data: [User],
+}
+
+type ArrayReportResponse {
+  status: Boolean
+  message: String
+  data: [Report],
+}
+
+type ArrayCategoryResponse {
+  status: Boolean
+  message: String
+  data: [Category],
+}
+
+type ArrayNewsResponse {
+  status: Boolean
+  message: String
+  data: [News],
+}
+
+type ArrayUserResponse {
+  status: Boolean
+  message: String
+  data: [User],
+}
+
 type Query {
-  getAllAnimals: [Animal]
   loginUser(email: String, password: String): SuccessType!
-  getAllUsers: [User]
-  getReports: [Report]
-  getCategories: [Category]
-  getNews: [News]
-  getFavoriteByUserId(userId: Int!): [Favorites]
+  getAllUsers: ArrayUserResponse
+  getReports: ArrayReportResponse
+  getCategories: ArrayCategoryResponse
+  getNews: ArrayNewsResponse
+  getFavoriteByUserId(userId: Int!): FavoriteResponse
 }
 
 type Mutation {
@@ -111,7 +140,7 @@ type Mutation {
     currentPassword: String!
     newPassword: String!
   ): SuccessType
-  deleteUser(id: Int!): [User]
+  deleteUser(id: Int!): ArrayUserResponse
   updateUser(id: Int!, email: String!, name: String): SuccessType
 
   # REPORTS MUTAIONS
@@ -139,7 +168,7 @@ type Mutation {
     Description: String
   ): ReportReponse
 
-  deleteReport(id: Int!): [Report]
+  deleteReport(id: Int!): ArrayReportResponse
 
   # REPORT MUTATIONS
   CreateCatagory(
@@ -157,7 +186,7 @@ type Mutation {
     BackgroundColor: String
   ): CategoryResponse
 
-  deleteCategory(id: Int!): [Category]
+  deleteCategory(id: Int!): ArrayCategoryResponse
 
 
   # NEW MUTATIONS
@@ -175,6 +204,6 @@ type Mutation {
     Tagline: String
     Description: String
   ): NewsResponse
-  deleteNews(id: Int!): [News]
-  addToFavorite(userId: Int!, newsId: Int!): [Favorites]
+  deleteNews(id: Int!): ArrayNewsResponse
+  addToFavorite(userId: Int!, newsId: Int!): FavoriteResponse
 }

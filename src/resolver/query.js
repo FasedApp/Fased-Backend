@@ -2,6 +2,7 @@
 const { prisma } = require("../database.js");
 const AuthServices = require("../services/authServices.js");
 const NewsServices = require("../services/NewsServices.js");
+const { createResponse } = require("../utils/HelperFuntions.js");
 
 
 const Query = {
@@ -13,27 +14,27 @@ const Query = {
     },
     getAllUsers: async (args, req, context) => {
         const response = await prisma.user.findMany()
-        return response
+        return createResponse(response, true, "all users")
     },
 
     // REPORT QUERIES
     getReports: async (args, req) => {
         const response = await prisma.report.findMany()
-        return response
+        return createResponse(response, true, "all reports")
     },
 
 
     // CATEGORY QUERIES
     getCategories: async (args, req) => {
         const response = await prisma.category.findMany()
-        return response
+        return createResponse(response, true, "all categories")
     },
 
 
     // NEW QUERIES
     getNews: async (args, req) => {
         const response = await prisma.news.findMany()
-        return response
+        return createResponse(response, true, "all news")
     },
     getFavoriteByUserId: async (args, req) => {
         const response = await NewsServices.getFavoriteByUserId(req);

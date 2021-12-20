@@ -1,6 +1,6 @@
 const { prisma } = require("../database.js");
+const { createError, createResponse } = require("../utils/HelperFuntions.js");
 require("dotenv").config();
-const createError = require("http-errors");
 
 const CategoryServices = {
   async CreateCatagory(data) {
@@ -50,7 +50,7 @@ const CategoryServices = {
       });
 
       const categories = await prisma.category.findMany();
-      return categories;
+      return createResponse(categories, true, "Category delete succesfull");
     } catch (error) {
       return createError(401, error);
     }
