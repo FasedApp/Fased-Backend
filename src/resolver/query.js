@@ -1,6 +1,7 @@
 
 const { prisma } = require("../database.js");
 const AuthServices = require("../services/authServices.js");
+const NewsServices = require("../services/NewsServices.js");
 
 
 const Query = {
@@ -33,7 +34,11 @@ const Query = {
     getNews: async (args, req) => {
         const response = await prisma.news.findMany()
         return response
-    }
+    },
+    getFavoriteByUserId: async (args, req) => {
+        const response = await NewsServices.getFavoriteByUserId(req);
+        return response;
+    },
     
 }
 

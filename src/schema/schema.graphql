@@ -61,6 +61,7 @@ type Favorites {
   userId: Int
   newsId: Int
   createdAt: Date
+  News: News
 }
 
 type SuccessType {
@@ -94,6 +95,7 @@ type Query {
   getReports: [Report]
   getCategories: [Category]
   getNews: [News]
+  getFavoriteByUserId(userId: Int!): [Favorites]
 }
 
 type Mutation {
@@ -174,4 +176,5 @@ type Mutation {
     Description: String
   ): NewsResponse
   deleteNews(id: Int!): [News]
+  addToFavorite(userId: Int!, newsId: Int!): [Favorites]
 }
