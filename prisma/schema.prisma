@@ -59,17 +59,19 @@ model Report {
 }
 
 model News {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   Image       String?
   Title       String?
   Tagline     String?
   Description String?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
+  favorites   Favorites[]
 }
 
 model Favorites {
-  id          Int      @id @default(autoincrement())
-  userId      Int?
-  newsId      Int?
-  createdAt   DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  newsId    Int
+  News      News     @relation(fields: [newsId], references: [id])
+  createdAt DateTime @default(now())
 }

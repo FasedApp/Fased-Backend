@@ -10,7 +10,7 @@ const NewsServices = {
         data: data,
       });
       return {
-        data: null,
+        data: data,
         status: true,
         message: "News Create Successfully",
       };
@@ -55,7 +55,77 @@ const NewsServices = {
     } catch (error) {
       return createError(401, error);
     }
+  },
+
+  async addToFavorite(data) {
+    const userExist = await prisma.user.findUnique({
+      where: {
+        id: data.userId
+      }
+    })
+
+    const newsExist = await prisma.news.findUnique({
+      where: {
+        id: data.newsId
+      }
+    })
+    if(!userExist) return createError(404, "User not exist")
+    if(!newsExist) return createError(404, "News not exist")
+
+    try {
+      const response = await prisma.favorites.findFirst({
+        where:{
+          userId: data.userId,
+          newsId: data.newsId
+        }
+      })
+
+      if(response) {
+        await prisma.favorites.delete({
+          where: {
+            id: response.id
+          }
+        })
+      }else {
+        await prisma.favorites.create({
+          data: data
+        })
+      }
+
+      let favorites =  prisma.favorites.findMany({
+        where:{
+          userId: data.userId
+        },
+        include: {
+          News: true
+        }
+      })
+      return favorites
+      // return createResponse(favorites, true, "Opration successfully")
+      
+    } catch (error) {
+      
+    }
+  },
+
+  async getFavoriteByUserId(data) {
+    const userExist = await prisma.user.findUnique({
+      where: {
+        id: data.userId
+      }
+    })
+    if(!userExist) return createError(404, "User not exist")
+    const favorites = await prisma.favorites.findMany({
+      where: {
+        userId: data.userId
+      },
+      include: {
+        News: true
+      }
+    })
+    return favorites
   }
+  
 };
 
 module.exports = NewsServices;
