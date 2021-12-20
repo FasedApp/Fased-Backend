@@ -1,7 +1,6 @@
 const { prisma } = require("../database.js");
 require("dotenv").config();
-const createError = require("http-errors");
-const { createResponse } = require("../utils/HelperFuntions.js");
+const { createResponse, createError } = require("../utils/HelperFuntions.js");
 
 const ReportServices = {
   async CreateReport(data) {
@@ -56,7 +55,7 @@ const ReportServices = {
       });
 
       const reports = await prisma.report.findMany();
-      return reports;
+      return createResponse(reports, true, "Report deleted");
     } catch (error) {
       return createError(401, error);
     }

@@ -2,11 +2,11 @@ const { prisma } = require("../database.js");
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("../utils/jwt");
-const createError = require("http-errors");
 const AuthServices = require("../services/authServices.js");
 const ReportServices = require("../services/reportServices.js");
 const CategoryServices = require("../services/categoryServices.js");
 const NewsServices = require("../services/NewsServices.js");
+const { createError } = require("../utils/HelperFuntions.js");
 
 const Mutation = {
   // AUTH MUTATIONS

@@ -1,11 +1,10 @@
 const { prisma } = require("../database.js");
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
-const createError = require("http-errors");
 const crypto = require("crypto");
 const { signAccessToken } = require("../utils/jwt.js");
 const SendMail = require("./emailServices.js");
-const { createResponse } = require("../utils/HelperFuntions.js");
+const { createResponse, createError } = require("../utils/HelperFuntions.js");
 
 const AuthServices = {
 
@@ -140,7 +139,7 @@ const AuthServices = {
       });
 
       const users = await prisma.user.findMany();
-      return users;
+      return createResponse(users, true, "User Delete Successfully");
     } catch (error) {
       return createError(401, error);
     }

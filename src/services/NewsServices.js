@@ -1,7 +1,6 @@
 const { prisma } = require("../database.js");
 require("dotenv").config();
-const createError = require("http-errors");
-const { createResponse } = require("../utils/HelperFuntions.js");
+const { createResponse, createError } = require("../utils/HelperFuntions.js");
 
 const NewsServices = {
   async CreateNews(data) {
@@ -51,7 +50,7 @@ const NewsServices = {
       });
 
       const news = await prisma.news.findMany();
-      return news;
+      return createResponse(news, true, "report deleted successfully");
     } catch (error) {
       return createError(401, error);
     }
@@ -100,7 +99,7 @@ const NewsServices = {
           News: true
         }
       })
-      return favorites
+      return createResponse(favorites, true, "Opration successfully")
       // return createResponse(favorites, true, "Opration successfully")
       
     } catch (error) {
@@ -123,7 +122,7 @@ const NewsServices = {
         News: true
       }
     })
-    return favorites
+    return {status: true, message: "", data: favorites}
   }
   
 };
