@@ -84,7 +84,7 @@ const ReportServices = {
     } catch (error) {
       return createError(500, error)
     }
-  }
+  } 
 };
 
 module.exports = ReportServices;
