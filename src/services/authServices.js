@@ -169,7 +169,7 @@ const AuthServices = {
         email: data.email,
       },
     });
-    if (!forgotpassword) return createError("404", "Email Not Valid");
+    if (!forgotpassword) return createError("404", "User not registered with this email");
     const token = await crypto.randomBytes(3);
     // console.log("forgotpassword.id", forgotpassword.id)
     const tokenData = await prisma.token.upsert({
