@@ -1,7 +1,9 @@
 
 const { prisma } = require("../database.js");
 const AuthServices = require("../services/authServices.js");
+const CategoryServices = require("../services/categoryServices.js");
 const NewsServices = require("../services/NewsServices.js");
+const ReportServices = require("../services/reportServices.js");
 const { createResponse } = require("../utils/HelperFuntions.js");
 
 
@@ -22,6 +24,11 @@ const Query = {
         const response = await prisma.report.findMany()
         return createResponse(response, true, "all reports")
     },
+    filterReports: async (args, req) => {
+        const response = await ReportServices.filterReports(req)
+        console.log("response", response)
+        return response
+    },
 
 
     // CATEGORY QUERIES
@@ -31,7 +38,7 @@ const Query = {
     },
 
 
-    // NEW QUERIES
+    // NEWS QUERIES
     getNews: async (args, req) => {
         const response = await prisma.news.findMany()
         return createResponse(response, true, "all news")

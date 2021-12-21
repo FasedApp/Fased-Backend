@@ -59,6 +59,31 @@ const ReportServices = {
     } catch (error) {
       return createError(401, error);
     }
+  },
+
+  async filterReports(data) {
+    try {
+      const filterCategories = await prisma.report.findMany({
+        where: {
+          OR: [
+            {
+              CategoryId: {
+                in: data.showIds,
+              },
+            },
+            {
+              SubCategory: {
+                in: data.showIds,
+              },
+            },
+          ],
+        },
+      })
+
+      return createResponse(filterCategories, true, "filter categories")
+    } catch (error) {
+      return createError(500, error)
+    }
   }
 };
 

@@ -121,10 +121,14 @@ type ArrayUserResponse {
 type Query {
   loginUser(email: String, password: String): SuccessType!
   getAllUsers: ArrayUserResponse
+
   getReports: ArrayReportResponse
-  getCategories: ArrayCategoryResponse
-  getNews: ArrayNewsResponse
+  filterReports(showIds: [Int!]): ArrayReportResponse
   getFavoriteByUserId(userId: Int!): FavoriteResponse
+
+  getCategories: ArrayCategoryResponse
+
+  getNews: ArrayNewsResponse
 }
 
 type Mutation {
@@ -187,7 +191,6 @@ type Mutation {
   ): CategoryResponse
 
   deleteCategory(id: Int!): ArrayCategoryResponse
-
 
   # NEW MUTATIONS
   CreateNews(

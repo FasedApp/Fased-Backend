@@ -54,7 +54,9 @@ const CategoryServices = {
     } catch (error) {
       return createError(401, error);
     }
-  }
+  },
+
+
 };
 
 module.exports = CategoryServices;

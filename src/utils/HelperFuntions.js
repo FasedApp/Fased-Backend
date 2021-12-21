@@ -5,7 +5,6 @@ const createResponse = (
   code = 200,
   ...args
 ) => {
-  console.log("{ data: data, status: status, message: message, code: code, ...args}", { data: data, status: status, message: message, code: code, ...args[0]})
   return { data: data, status: status, message: message, code: code, ...args};
 };
 
