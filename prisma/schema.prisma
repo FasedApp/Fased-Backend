@@ -54,7 +54,7 @@ model Report {
   userId       Int
   latitude     Float
   longitude    Float
-  // IncidentDate DateTime @default(now())
+  IncidentDate DateTime @default(now())
   SuspectName  String
   CostMoney    Int
   floor        Int?      @default(0)
