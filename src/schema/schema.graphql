@@ -29,7 +29,7 @@ type Report {
   SubCategory: Int
   latitude: Float
   longitude: Float
-  IncidentDate: Date
+  # IncidentDate: Date
   SuspectName: String
   CostMoney: Int
   floor: Int
