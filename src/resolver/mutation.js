@@ -14,6 +14,10 @@ const Mutation = {
     const response = await AuthServices.createUser(req);
     return response;
   },
+  socialMediaLogin: async (args, req) => {
+    const response = await AuthServices.socialMediaLogin(req);
+    return response;
+  },
   changePassword: async (args, req) => {
     const response = await AuthServices.changePassword(req);
     return response;

@@ -19,11 +19,14 @@ model Animal {
 }
 
 model User {
-  id         Int     @id @default(autoincrement())
-  email      String  @unique
-  name       String?
-  password   String?
-  isVerified Boolean @default(false)
+  id               Int      @id @default(autoincrement())
+  email            String   @default("null")
+  name             String
+  password         String?
+  isVerified       Boolean  @default(false)
+  providerId       String   @default("")
+  registrationType String   @default("emailpassword")
+  createdAt        DateTime @default(now())
 }
 
 model Token {
@@ -54,17 +57,18 @@ model Report {
   IncidentDate DateTime @default(now())
   SuspectName  String
   CostMoney    Int
+  floor        Int      @default(0)
   Description  String
   createdAt    DateTime @default(now())
 }
 
 model News {
-  id          Int       @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   Image       String?
   Title       String?
   Tagline     String?
   Description String?
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime    @default(now())
   favorites   Favorites[]
 }
 

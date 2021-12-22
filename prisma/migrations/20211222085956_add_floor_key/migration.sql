@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Report" ADD COLUMN     "floor" INTEGER NOT NULL DEFAULT 0;

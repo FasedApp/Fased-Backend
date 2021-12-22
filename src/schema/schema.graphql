@@ -1,12 +1,14 @@
 scalar Date
 
-
 type User {
   id: ID!
   email: String!
   name: String!
-  password: String!
+  password: String
   isVerified: Boolean
+  providerId: String
+  registrationType: String
+  createdAt: Date
 }
 
 type Category {
@@ -30,6 +32,7 @@ type Report {
   IncidentDate: Date
   SuspectName: String
   CostMoney: Int
+  floor: Int
   Description: String
   createdAt: Date
 }
@@ -85,37 +88,37 @@ type NewsResponse {
 type FavoriteResponse {
   status: Boolean
   message: String
-  data: [Favorites],
+  data: [Favorites]
 }
 
 type ArrayUserResponse {
   status: Boolean
   message: String
-  data: [User],
+  data: [User]
 }
 
 type ArrayReportResponse {
   status: Boolean
   message: String
-  data: [Report],
+  data: [Report]
 }
 
 type ArrayCategoryResponse {
   status: Boolean
   message: String
-  data: [Category],
+  data: [Category]
 }
 
 type ArrayNewsResponse {
   status: Boolean
   message: String
-  data: [News],
+  data: [News]
 }
 
 type ArrayUserResponse {
   status: Boolean
   message: String
-  data: [User],
+  data: [User]
 }
 
 type Query {
@@ -133,7 +136,13 @@ type Query {
 
 type Mutation {
   # AUTH MUTATIONS
-  addUser(email: String!, name: String, password: String): SuccessType
+  addUser(email: String!, name: String!, password: String!): SuccessType
+  socialMediaLogin(
+    providerId: String!
+    registrationType: String!
+    name: String
+    email: String
+  ): SuccessType
   forgotPassword(email: String!): SuccessType
   OtpVerify_Email(token: String!, email: String!): SuccessType
   # verifyOtp(token: String!, email: String!): SuccessType
@@ -156,8 +165,9 @@ type Mutation {
     longitude: Float!
     SuspectName: String!
     CostMoney: Int!
-    IncidentDate: Date
+    IncidentDate: Date!
     Description: String!
+    floor: Int!
   ): ReportReponse
 
   EditReport(
@@ -170,6 +180,7 @@ type Mutation {
     SuspectName: String
     CostMoney: Int
     Description: String
+    floor: Int
   ): ReportReponse
 
   deleteReport(id: Int!): ArrayReportResponse

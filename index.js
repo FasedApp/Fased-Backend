@@ -7,7 +7,6 @@ const { prisma } = require("./src/database");
 const { resolvers } = require('./src/resolver')
 
 
-
 const server = new ApolloServer({
   typeDefs: readFileSync(
     path.join(__dirname, './src/schema/schema.graphql'),

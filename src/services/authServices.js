@@ -231,6 +231,40 @@ const AuthServices = {
       return createError(401, error);
     }
   },
+
+  async socialMediaLogin (data) {
+    try {
+      const isExist = await prisma.user.findFirst({
+        where: {
+          OR: [
+            {
+              email: data.email
+            },
+            {
+              providerId: data.providerId
+            }
+          ]
+        }
+      })
+      var response;
+      if (isExist) {
+         response = await prisma.user.update({
+           where:{
+            id: isExist.id
+           },
+          data: data
+        })
+      }else {
+         response = await prisma.user.create({
+          data: data
+        })
+      }
+      
+      return createResponse(response, true, "login successfully")
+    } catch (error) {
+      return createError(500, error, false)
+    }
+  }
 };
 
 module.exports = AuthServices;
