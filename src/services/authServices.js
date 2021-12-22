@@ -9,7 +9,7 @@ const { createResponse, createError } = require("../utils/HelperFuntions.js");
 const AuthServices = {
 
   async createUser(data) {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: { email: data.email },
     });
     if (user) return createError(401, "Email Already exist");
@@ -36,7 +36,7 @@ const AuthServices = {
   },
 
   async verifyOtp(data) {
-    const userExist = await prisma.user.findUnique({
+    const userExist = await prisma.user.findFirst({
       where: { email: data.email },
     });
     if (!userExist) return createError("404", "User Not Found!");
@@ -61,7 +61,7 @@ const AuthServices = {
 
   async resendOtp(data) {
     console.log("data", data);
-    const userExist = await prisma.user.findUnique({
+    const userExist = await prisma.user.findFirst({
       where: { email: data.email },
     });
     if (!userExist) return createError("404", "User Not Found!");
@@ -80,7 +80,7 @@ const AuthServices = {
   },
 
   async loginUser(data) {
-    const userExist = await prisma.user.findUnique({
+    const userExist = await prisma.user.findFirst({
       where: { email: data.email },
     });
     if (!userExist) return createError("404", "User Not Found!");
@@ -95,7 +95,7 @@ const AuthServices = {
   },
 
   async changePassword(data) {
-    const userExist = await prisma.user.findUnique({
+    const userExist = await prisma.user.findFirst({
       where: { id: data.id },
     });
 
@@ -164,7 +164,7 @@ const AuthServices = {
   },
 
   async forgotPassword(data) {
-    const forgotpassword = await prisma.user.findUnique({
+    const forgotpassword = await prisma.user.findFirst({
       where: {
         email: data.email,
       },
@@ -190,7 +190,7 @@ const AuthServices = {
   },
 
   async OtpVerify_Email(data) {
-    const userExist = await prisma.user.findUnique({
+    const userExist = await prisma.user.findFirst({
       where: { email: data.email },
     });
     if (!userExist) return createError("404", "User Not Found!");
@@ -209,7 +209,7 @@ const AuthServices = {
   },
 
   async newPassword(data) {
-    const userExist = await prisma.user.findUnique({
+    const userExist = await prisma.user.findFirst({
       where: { email: data.email },
     });
 
