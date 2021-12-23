@@ -26,7 +26,13 @@ const Query = {
     },
     filterReports: async (args, req) => {
         const response = await ReportServices.filterReports(req)
-        console.log("response", response)
+        // console.log("response", response)
+        return response
+    },
+
+    filterReportsByDate: async (args, req) => {
+        const response = await ReportServices.filterReportsByDate(req)
+        // console.log("response", response)
         return response
     },
 

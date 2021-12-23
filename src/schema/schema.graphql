@@ -128,6 +128,7 @@ type Query {
 
   getReports: ArrayReportResponse
   filterReports(showIds: [Int!]): ArrayReportResponse
+  filterReportsByDate(from: Date!, to: Date!): ArrayReportResponse
   getFavoriteByUserId(userId: Int!): FavoriteResponse
 
   getCategories: ArrayCategoryResponse

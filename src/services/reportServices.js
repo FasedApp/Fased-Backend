@@ -86,8 +86,20 @@ const ReportServices = {
     }
   }, 
 
-  async filterReportsByDate() {
-    
+  async filterReportsByDate(data) {
+    try {
+      const result = await prisma.report.findMany({
+        where: {
+          IncidentDate: {
+            gte: new Date(data.from) /* Includes time offset for UTC */,
+            lte: new Date(data.to)
+          },
+        },
+      })
+      return createResponse(result, true, "filter categories")
+    } catch (error) {
+      return createError(500, error)
+    }
   }
 };
 
