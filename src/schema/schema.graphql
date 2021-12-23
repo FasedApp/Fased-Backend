@@ -30,6 +30,7 @@ type Report {
   latitude: Float
   longitude: Float
   IncidentDate: Date
+  IncidentTime: String
   SuspectName: String
   CostMoney: Int
   floor: Int
@@ -160,12 +161,13 @@ type Mutation {
   CreateReport(
     userId: Int!
     CategoryId: Int!
-    SubCategory: Int!
+    SubCategory: Int
     latitude: Float!
     longitude: Float!
     SuspectName: String!
     CostMoney: Int!
     IncidentDate: Date!
+    IncidentTime: String!
     Description: String!
     floor: Int!
   ): ReportReponse

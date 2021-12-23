@@ -60,6 +60,7 @@ model Report {
   floor        Int?      @default(0)
   Description  String
   createdAt    DateTime @default(now())
+  IncidentTime String?  @default("00:00")   
 }
 
 model News {
