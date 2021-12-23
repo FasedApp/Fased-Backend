@@ -84,7 +84,11 @@ const ReportServices = {
     } catch (error) {
       return createError(500, error)
     }
-  } 
+  }, 
+
+  async filterReportsByDate() {
+    
+  }
 };
 
 module.exports = ReportServices;
