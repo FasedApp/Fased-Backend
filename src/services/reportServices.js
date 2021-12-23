@@ -78,6 +78,9 @@ const ReportServices = {
             },
           ],
         },
+        include: {
+          Category: true
+        }
       })
 
       return createResponse(filterCategories, true, "filter categories")
@@ -95,6 +98,9 @@ const ReportServices = {
             lte: new Date(data.to)
           },
         },
+        include: {
+          Category: true
+        }
       })
       return createResponse(result, true, "filter categories")
     } catch (error) {
