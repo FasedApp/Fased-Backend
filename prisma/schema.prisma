@@ -48,9 +48,9 @@ model Category {
 
 model Report {
   id           Int      @id @default(autoincrement())
-  Category     Category @relation(fields: [SubCategory], references: [id])
+  Category     Category @relation(fields: [CategoryId], references: [id])
   CategoryId   Int
-  SubCategory  Int
+  SubCategory  Int?
   userId       Int
   latitude     Float
   longitude    Float
