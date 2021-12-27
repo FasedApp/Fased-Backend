@@ -46,7 +46,11 @@ const Query = {
 
   // NEWS QUERIES
   getNews: async (args, req) => {
-    const response = await prisma.news.findMany();
+    const response = await prisma.news.findMany({
+      orderBy: {
+        CategoryId: "asc"
+      }
+    });
     return createResponse(response, true, "all news");
   },
   getFavoriteByUserId: async (args, req) => {

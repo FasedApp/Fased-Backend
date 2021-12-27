@@ -69,6 +69,7 @@ model News {
   Title       String?
   Tagline     String?
   Description String?
+  CategoryId  Int?
   createdAt   DateTime    @default(now())
   favorites   Favorites[]
 }
