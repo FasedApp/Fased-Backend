@@ -53,7 +53,7 @@ type News {
   Description: String
   createdAt: Date
   CategoryId: Int
-
+  CategoryName: String
 }
 
 type Favorites {
@@ -211,6 +211,7 @@ type Mutation {
   # NEW MUTATIONS
   CreateNews(
     CategoryId: Int!
+    CategoryName: String!
     Image: String!
     Title: String!
     Tagline: String!
@@ -224,6 +225,7 @@ type Mutation {
     Tagline: String
     Description: String
     CategoryId: Int
+    CategoryName: String
   ): NewsResponse
   deleteNews(id: Int!): ArrayNewsResponse
   addToFavorite(userId: Int!, newsId: Int!): FavoriteResponse

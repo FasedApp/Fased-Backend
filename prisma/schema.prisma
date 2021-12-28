@@ -57,27 +57,28 @@ model Report {
   IncidentDate DateTime @default(now())
   SuspectName  String
   CostMoney    Int
-  floor        Int?      @default(0)
+  floor        Int?     @default(0)
   Description  String
   createdAt    DateTime @default(now())
-  IncidentTime String?  @default("00:00")   
+  IncidentTime String?  @default("00:00")
 }
 
 model News {
-  id          Int         @id @default(autoincrement())
-  Image       String?
-  Title       String?
-  Tagline     String?
-  Description String?
-  CategoryId  Int?
-  createdAt   DateTime    @default(now())
-  favorites   Favorites[]
+  id           Int         @id @default(autoincrement())
+  Image        String?
+  Title        String?
+  Tagline      String?
+  Description  String?
+  CategoryId   Int?
+  createdAt    DateTime    @default(now())
+  favorites    Favorites[]
+  CategoryName String?
 }
 
 model Favorites {
   id        Int      @id @default(autoincrement())
   userId    Int?
   newsId    Int
-  News      News     @relation(fields: [newsId], references: [id])
+  News      News?     @relation(fields: [newsId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
