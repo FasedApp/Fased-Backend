@@ -99,7 +99,7 @@ const NewsServices = {
           News: true
         }
       })
-      return createResponse(favorites, true, "Opration successfully")
+      return createResponse(favorites, true, response ? "Remove to favorite successfully": "Add to favorite successfully")
       // return createResponse(favorites, true, "Opration successfully")
       
     } catch (error) {
