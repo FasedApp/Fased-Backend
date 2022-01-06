@@ -8,7 +8,6 @@ const { createResponse } = require("../utils/HelperFuntions.js");
 const Query = {
   // AUTH QUERIES
   loginUser: async (args, req, context) => {
-    console.log("args, req, context", args, req, context);
     const response = await AuthServices.loginUser(req);
     return response;
   },
@@ -56,6 +55,20 @@ const Query = {
   getFavoriteByUserId: async (args, req) => {
     const response = await NewsServices.getFavoriteByUserId(req);
     return response;
+  },
+
+  getFlagReports:async (args, req) => {
+    const response = await prisma.flagReport.findMany({
+      include: {
+        User: true
+      }
+    })
+    return createResponse(response, true, "all reports");;
+  },
+
+  getFlagReasons:async (args, req) => {
+    const response = await prisma.flagReason.findMany()
+    return createResponse(response, true, "all reasons");;
   },
 };
 

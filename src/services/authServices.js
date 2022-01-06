@@ -21,7 +21,6 @@ const AuthServices = {
       const responseData = await prisma.user.create({
         data: data,
       });
-      console.log("token", token);
       const tokenData = await prisma.token.create({
         data: {
           token: token.toString("hex"),
@@ -50,7 +49,6 @@ const AuthServices = {
       return createError("401", "Otp is not set or expired");
     var diff = Math.abs(new Date(verifyOtp.createdAt) - new Date());
     var minutes = Math.floor(diff / 1000 / 60);
-    console.log("minutes", minutes);
     if (minutes >= 2) return createError("401", "Otp is expired");
     const userData = await prisma.user.update({
       where: { id: userExist.id },
@@ -60,7 +58,6 @@ const AuthServices = {
   },
 
   async resendOtp(data) {
-    console.log("data", data);
     const userExist = await prisma.user.findFirst({
       where: { email: data.email },
     });

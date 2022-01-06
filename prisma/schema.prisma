@@ -19,14 +19,15 @@ model Animal {
 }
 
 model User {
-  id               Int      @id @default(autoincrement())
-  email            String   @default("null")
+  id               Int          @id @default(autoincrement())
+  email            String       @default("null")
   name             String
   password         String?
-  isVerified       Boolean  @default(false)
-  providerId       String   @default("")
-  registrationType String   @default("emailpassword")
-  createdAt        DateTime @default(now())
+  isVerified       Boolean      @default(false)
+  providerId       String       @default("")
+  registrationType String       @default("emailpassword")
+  createdAt        DateTime     @default(now())
+  FlagReport       FlagReport[]
 }
 
 model Token {
@@ -79,6 +80,21 @@ model Favorites {
   id        Int      @id @default(autoincrement())
   userId    Int?
   newsId    Int
-  News      News?     @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  News      News?    @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model FlagReason {
+  id        Int      @id @default(autoincrement())
+  reason    String
+  createdAt DateTime @default(now())
+}
+
+model FlagReport {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  reasonId  Int
+  reason    String
+  User      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }

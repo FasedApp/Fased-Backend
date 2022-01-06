@@ -7,6 +7,7 @@ const ReportServices = require("../services/reportServices.js");
 const CategoryServices = require("../services/categoryServices.js");
 const NewsServices = require("../services/NewsServices.js");
 const { createError } = require("../utils/HelperFuntions.js");
+const FlagServices = require("../services/FlagServices.js");
 
 const Mutation = {
   // AUTH MUTATIONS
@@ -97,6 +98,23 @@ const Mutation = {
     return response;
   },
   
+  // FLAG MUTATIONS
+  CreateReason: async (args, req) => {
+    const response = await FlagServices.CreateReason(req);
+    return response;
+  },
+  EditReason: async (args, req) => {
+    const response = await FlagServices.EditReason(req);
+    return response;
+  },
+  deleteReason: async (args, req) => {
+    const response = await FlagServices.deleteReason(req);
+    return response;
+  },
+  CreateFlagReport: async (args, req) => {
+    const response = await FlagServices.CreateFlagReport(req);
+    return response;
+  },
 };
 
 module.exports = {

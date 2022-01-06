@@ -64,6 +64,45 @@ type Favorites {
   News: News
 }
 
+type FlagReason {
+  id: Int
+  reason: String
+  createdAt: Date
+}
+
+type FlagReasonReponse {
+  status: Boolean
+  message: String
+  data: FlagReason
+}
+
+type FlagReasonArrayReponse {
+  status: Boolean
+  message: String
+  data: [FlagReason]
+}
+
+type FlagReport {
+  id: Int
+  userId: Int
+  reasonId: Int
+  reason: String
+  User: User
+  createdAt: Date
+}
+
+type FlagReportReponse {
+  status: Boolean
+  message: String
+  data: FlagReport
+}
+
+type FlagReportArrayReponse {
+  status: Boolean
+  message: String
+  data: [FlagReport]
+}
+
 type SuccessType {
   status: Boolean
   message: String
@@ -136,6 +175,10 @@ type Query {
   getCategories: ArrayCategoryResponse
 
   getNews: ArrayNewsResponse
+
+  getFlagReports: FlagReportArrayReponse
+  getFlagReasons: FlagReasonArrayReponse
+
 }
 
 type Mutation {
@@ -229,4 +272,10 @@ type Mutation {
   ): NewsResponse
   deleteNews(id: Int!): ArrayNewsResponse
   addToFavorite(userId: Int!, newsId: Int!): FavoriteResponse
+
+  # FLAG MUTATIONS
+  CreateReason(reason: String!): FlagReasonReponse
+  EditReason(id: Int!, reason: String): FlagReasonReponse
+  deleteReason(id: Int!): FlagReasonArrayReponse
+  CreateFlagReport(userId: Int!, reasonId: Int!, reason: String!): FlagReportReponse
 }

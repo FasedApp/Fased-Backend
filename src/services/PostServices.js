@@ -23,7 +23,6 @@ const PostServices = {
       const userExist = await prisma.user.findUnique({
           where: {id: data.id}
       })
-      console.log("data", data)
 
       if (!userExist) return createError('404', 'User Not Found!')
       

@@ -1,5 +1,4 @@
 const SendMail = (toUser, otp) => {
-  console.log("send mail running");
   const nodemailer = require("nodemailer");
 
   let transporter = nodemailer.createTransport({
@@ -31,7 +30,6 @@ const SendMail = (toUser, otp) => {
     if (err) {
       console.log("error transporter", err);
     } else {
-      console.log("transporter info", info);
     }
   });
 };
