@@ -6,6 +6,7 @@ type User {
   name: String!
   password: String
   isVerified: Boolean
+  isBlocked: Boolean
   providerId: String
   registrationType: String
   createdAt: Date
@@ -201,7 +202,7 @@ type Mutation {
     newPassword: String!
   ): SuccessType
   deleteUser(id: Int!): ArrayUserResponse
-  updateUser(id: Int!, email: String!, name: String): SuccessType
+  updateUser(id: Int!, email: String!, name: String, isBlocked: Boolean): SuccessType
 
   # REPORTS MUTAIONS
   CreateReport(
