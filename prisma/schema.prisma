@@ -26,6 +26,8 @@ model User {
   isVerified       Boolean      @default(false)
   providerId       String       @default("")
   registrationType String       @default("emailpassword")
+  isBlocked        Boolean      @default(false)
+  fcmToken         String       @default("")
   createdAt        DateTime     @default(now())
   FlagReport       FlagReport[]
 }

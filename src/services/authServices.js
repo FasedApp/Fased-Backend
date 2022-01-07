@@ -81,7 +81,7 @@ const AuthServices = {
       where: { email: data.email },
     });
     if (!userExist) return createError("404", "User Not Found!");
-
+    if (userExist.isBlocked) return createError("403", "User has been blocked by administrator");
     const checkPassword = bcrypt.compareSync(data.password, userExist.password);
     if (!checkPassword) return createError("401", "Email/Password incorrect");
     // if (!userExist.isVerified)
