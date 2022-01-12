@@ -123,6 +123,29 @@ const NewsServices = {
       }
     })
     return {status: true, message: "", data: favorites}
+  },
+
+  async searchNews(data) {
+    const favorites = await prisma.news.findMany({
+      where: {
+        OR: [
+          {
+            Title: {
+              contains: data.text
+            }
+          },
+          {
+            Tagline: {
+              contains: data.text,
+            },
+          },
+        ],
+      },
+      orderBy: {
+        CategoryId: "asc"
+      },
+    })
+    return {status: true, message: "", data: favorites}
   }
   
 };

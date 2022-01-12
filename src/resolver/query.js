@@ -30,7 +30,6 @@ const Query = {
     // console.log("response", response)
     return response;
   },
-
   filterReportsByDate: async (args, req) => {
     const response = await ReportServices.filterReportsByDate(req);
     // console.log("response", response)
@@ -51,6 +50,10 @@ const Query = {
       }
     });
     return createResponse(response, true, "all news");
+  },
+  searchNews: async (args, req) => {
+    const response = await NewsServices.searchNews(req);
+    return response;
   },
   getFavoriteByUserId: async (args, req) => {
     const response = await NewsServices.getFavoriteByUserId(req);

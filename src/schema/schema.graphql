@@ -176,7 +176,7 @@ type Query {
   getCategories: ArrayCategoryResponse
 
   getNews: ArrayNewsResponse
-
+  searchNews(text: String!): ArrayNewsResponse
   getFlagReports: FlagReportArrayReponse
   getFlagReasons: FlagReasonArrayReponse
 
