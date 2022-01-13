@@ -146,7 +146,41 @@ const NewsServices = {
       },
     })
     return {status: true, message: "", data: favorites}
-  }
+  },
+
+  async searchFav(data) {
+    const userExist = await prisma.user.findUnique({
+      where: {
+        id: data.userId
+      }
+    })
+    if(!userExist) return createError(404, "User not exist")
+    const favorites = await prisma.favorites.findMany({
+      where: {
+       userId: data.userId,
+       News: {
+        OR: [
+          {
+            Title: {
+              contains: data.text,
+              mode: "insensitive"
+            }
+          },
+          {
+            Tagline: {
+              contains: data.text,
+              mode: "insensitive"
+            },
+          },
+        ],
+       }
+      },
+      include: {
+        News: true
+      }
+    })
+    return {status: true, message: "", data: favorites}
+  },
   
 };
 

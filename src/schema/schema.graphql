@@ -172,7 +172,7 @@ type Query {
   filterReports(showIds: [Int!]): ArrayReportResponse
   filterReportsByDate(from: Date!, to: Date!): ArrayReportResponse
   getFavoriteByUserId(userId: Int!): FavoriteResponse
-
+  searchFav(userId: Int!, text: String!): FavoriteResponse
   getCategories: ArrayCategoryResponse
 
   getNews: ArrayNewsResponse

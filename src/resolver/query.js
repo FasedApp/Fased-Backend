@@ -59,6 +59,10 @@ const Query = {
     const response = await NewsServices.getFavoriteByUserId(req);
     return response;
   },
+  searchFav: async (args, req) => {
+    const response = await NewsServices.searchFav(req);
+    return response;
+  },
 
   getFlagReports:async (args, req) => {
     const response = await prisma.flagReport.findMany({
