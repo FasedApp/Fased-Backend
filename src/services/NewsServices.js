@@ -131,12 +131,14 @@ const NewsServices = {
         OR: [
           {
             Title: {
-              contains: data.text
+              contains: data.text,
+              mode: "insensitive"
             }
           },
           {
             Tagline: {
               contains: data.text,
+              mode: "insensitive"
             },
           },
         ],
