@@ -115,7 +115,7 @@ const AuthServices = {
           password: newPassword,
         },
       });
-      return createResponse(responseData, true, "Password Change Successfully");
+      return createResponse(responseData, true, "The updated password changed successfully");
     } catch (error) {
       return createError(401, error);
     }
