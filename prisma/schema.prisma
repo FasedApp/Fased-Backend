@@ -52,7 +52,7 @@ model Category {
 
 model Report {
   id           Int      @id @default(autoincrement())
-  Category     Category @relation(fields: [CategoryId], references: [id], onDelete: Cascade)
+  Category     Category @relation(fields: [CategoryId], references: [id])
   CategoryId   Int
   SubCategory  Int?
   userId       Int
