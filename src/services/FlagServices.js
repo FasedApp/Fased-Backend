@@ -42,6 +42,14 @@ const FlagServices = {
 
     if (!reasonExist) return createError("404", "Reason Not Found!");
 
+    const reportExist = await prisma.flagReport.findFirst({
+      where: {
+        reasonId: reasonExist.id
+      }
+    })
+
+    if (reportExist) return createError("403", "Flag report exists belong to this reason");
+
     try {
       const responseData = await prisma.flagReason.delete({
         where: {
