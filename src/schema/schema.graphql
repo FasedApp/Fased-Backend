@@ -206,7 +206,7 @@ type Mutation {
 
   # REPORTS MUTAIONS
   CreateReport(
-    userId: Int!
+    userId: Int
     CategoryId: Int!
     SubCategory: Int
     latitude: Float!

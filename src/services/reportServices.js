@@ -4,10 +4,10 @@ const { createResponse, createError } = require("../utils/HelperFuntions.js");
 
 const ReportServices = {
   async CreateReport(data) {
-    const UserExist = await prisma.user.findUnique({
-      where: { id: data.userId },
-    });
-    if (!UserExist) return createError(401, "User Dosn't Exist");
+    // const UserExist = await prisma.user.findUnique({
+    //   where: { id: data.userId },
+    // });
+    // if (!UserExist) return createError(401, "User Dosn't Exist");
     try {
       const responseData = await prisma.report.create({
         data: data,

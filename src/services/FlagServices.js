@@ -81,6 +81,35 @@ const FlagServices = {
       return createError(401, error);
     }
   },
+
+  async deleteFlagReport(data) {
+    const reasonExist = await prisma.flagReport.findUnique({
+      where: { id: data.id },
+    });
+
+    if (!reasonExist) return createError("404", "Reason Not Found!");
+
+    const reportExist = await prisma.flagReport.findFirst({
+      where: {
+        reasonId: reasonExist.id
+      }
+    })
+
+    if (reportExist) return createError("403", "Flag report exists belong to this reason");
+
+    try {
+      const responseData = await prisma.flagReason.delete({
+        where: {
+          id: data.id,
+        },
+      });
+
+      const reasons = await prisma.flagReason.findMany();
+      return createResponse(reasons, true, "Reason delete succesfull");
+    } catch (error) {
+      return createError(401, error);
+    }
+  },
 };
 
 module.exports = FlagServices;
