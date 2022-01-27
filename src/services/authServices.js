@@ -27,7 +27,7 @@ const AuthServices = {
           userId: responseData.id,
         },
       });
-      SendMail(responseData.email, token.toString("hex"));
+      // SendMail(responseData.email, token.toString("hex"));
       return createResponse(responseData, true, "User Created Successfully");
     } catch (error) {
       return createError(401, error);
