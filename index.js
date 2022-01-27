@@ -16,8 +16,7 @@ const server = new ApolloServer({
   context: {
     prisma,
   },
-  introspection: true,
-  playground: true,
+  introspection: true
 })
 
 server
