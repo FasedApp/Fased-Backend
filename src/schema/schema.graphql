@@ -165,7 +165,7 @@ type ArrayUserResponse {
 }
 
 type Query {
-  loginUser(email: String, password: String): SuccessType!
+  loginUser(email: String, password: String): SuccessType
   getAllUsers: ArrayUserResponse
 
   getReports: ArrayReportResponse
