@@ -7,7 +7,7 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -51,21 +51,20 @@ model Category {
 }
 
 model Report {
-  id           Int          @id @default(autoincrement())
-  Category     Category     @relation(fields: [CategoryId], references: [id])
+  id           Int      @id @default(autoincrement())
+  Category     Category @relation(fields: [CategoryId], references: [id])
   CategoryId   Int
   SubCategory  Int?
   userId       Int
   latitude     Float
   longitude    Float
-  IncidentDate DateTime     @default(now())
+  IncidentDate DateTime @default(now())
   SuspectName  String
   CostMoney    Int
-  floor        Int?         @default(0)
+  floor        Int?     @default(0)
   Description  String
-  createdAt    DateTime     @default(now())
-  IncidentTime String?      @default("00:00")
-  FlagReport   FlagReport[]
+  createdAt    DateTime @default(now())
+  IncidentTime String?  @default("00:00")
 }
 
 model News {
@@ -99,8 +98,6 @@ model FlagReport {
   userId    Int
   reasonId  Int
   reason    String
-  reportId  Int
-  Report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
-  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
