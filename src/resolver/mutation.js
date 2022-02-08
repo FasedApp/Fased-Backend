@@ -115,6 +115,10 @@ const Mutation = {
     const response = await FlagServices.CreateFlagReport(req);
     return response;
   },
+  deleteFlagReport: async (args, req) => {
+    const response = await FlagServices.deleteFlagReport(req);
+    return response;
+  },
 };
 
 module.exports = {

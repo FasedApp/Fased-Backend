@@ -86,7 +86,16 @@ const AuthServices = {
     if (!checkPassword) return createError("401", "Email/Password incorrect");
     // if (!userExist.isVerified)
     //   return createError("401", "Please Verify your account");
-
+    if(data.fcmToken) {
+      await prisma.user.update({
+        where: {
+          id: userExist.id
+        },
+        data: {
+          fcmToken: data.fcmToken
+        }
+      })
+    }
     userExist.password = "******";
     return createResponse(userExist, true, "Signin Successful");
   },
