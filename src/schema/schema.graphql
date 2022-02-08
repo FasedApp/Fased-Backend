@@ -87,8 +87,10 @@ type FlagReport {
   id: Int
   userId: Int
   reasonId: Int
+  reportId: Int
   reason: String
   User: User
+  Report: Report
   createdAt: Date
 }
 
@@ -165,7 +167,7 @@ type ArrayUserResponse {
 }
 
 type Query {
-  loginUser(email: String, password: String): SuccessType!
+  loginUser(email: String, password: String): SuccessType
   getAllUsers: ArrayUserResponse
 
   getReports: ArrayReportResponse
@@ -179,7 +181,6 @@ type Query {
   searchNews(text: String!): ArrayNewsResponse
   getFlagReports: FlagReportArrayReponse
   getFlagReasons: FlagReasonArrayReponse
-
 }
 
 type Mutation {
@@ -202,7 +203,12 @@ type Mutation {
     newPassword: String!
   ): SuccessType
   deleteUser(id: Int!): ArrayUserResponse
-  updateUser(id: Int!, email: String!, name: String, isBlocked: Boolean): SuccessType
+  updateUser(
+    id: Int!
+    email: String!
+    name: String
+    isBlocked: Boolean
+  ): SuccessType
 
   # REPORTS MUTAIONS
   CreateReport(
@@ -278,5 +284,10 @@ type Mutation {
   CreateReason(reason: String!): FlagReasonReponse
   EditReason(id: Int!, reason: String): FlagReasonReponse
   deleteReason(id: Int!): FlagReasonArrayReponse
-  CreateFlagReport(userId: Int!, reasonId: Int!, reason: String!): FlagReportReponse
+  CreateFlagReport(
+    userId: Int!
+    reasonId: Int!
+    reason: String!
+    reportId: Int!
+  ): FlagReportReponse
 }

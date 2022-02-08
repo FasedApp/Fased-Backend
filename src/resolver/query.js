@@ -67,7 +67,8 @@ const Query = {
   getFlagReports:async (args, req) => {
     const response = await prisma.flagReport.findMany({
       include: {
-        User: true
+        User: true,
+        Report: true
       }
     })
     return createResponse(response, true, "all reports");;
