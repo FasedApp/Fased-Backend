@@ -15,7 +15,7 @@ const NewsServices = {
         }
       })
       const tokens = users.map((val) => val?.fcmToken)
-      console.log("CreateNews users", News)
+      console.log("CreateNews users", tokens , {screen: 'news'}, News.Title, News.Tagline)
       await Notification.SendNotificationToMutliUsers( tokens , {screen: 'news'}, News.Title, News.Tagline)
       return {
         data: data,
