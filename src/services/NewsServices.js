@@ -10,13 +10,27 @@ const NewsServices = {
         data: data,
       });
       const users = await prisma.user.findMany({
+        where: {
+          fcmToken: { not: "" },
+        },
         select: {
-          fcmToken: true
-        }
-      })
-      const tokens = users.map((val) => val?.fcmToken)
-      console.log("CreateNews users", tokens , {screen: 'news'}, News.Title, News.Tagline)
-      await Notification.SendNotificationToMutliUsers( tokens , {screen: 'news'}, News.Title, News.Tagline)
+          fcmToken: true,
+        },
+      });
+      const tokens = users.map((val) => val?.fcmToken);
+      console.log(
+        "CreateNews users",
+        tokens,
+        { screen: "news" },
+        News.Title,
+        News.Tagline
+      );
+      await Notification.SendNotificationToMutliUsers(
+        tokens,
+        { screen: "news" },
+        News.Title,
+        News.Tagline
+      );
       return {
         data: data,
         status: true,
@@ -68,70 +82,73 @@ const NewsServices = {
   async addToFavorite(data) {
     const userExist = await prisma.user.findUnique({
       where: {
-        id: data.userId
-      }
-    })
+        id: data.userId,
+      },
+    });
 
     const newsExist = await prisma.news.findUnique({
       where: {
-        id: data.newsId
-      }
-    })
-    if(!userExist) return createError(404, "User not exist")
-    if(!newsExist) return createError(404, "News not exist")
+        id: data.newsId,
+      },
+    });
+    if (!userExist) return createError(404, "User not exist");
+    if (!newsExist) return createError(404, "News not exist");
 
     try {
       const response = await prisma.favorites.findFirst({
-        where:{
+        where: {
           userId: data.userId,
-          newsId: data.newsId
-        }
-      })
+          newsId: data.newsId,
+        },
+      });
 
-      if(response) {
+      if (response) {
         await prisma.favorites.delete({
           where: {
-            id: response.id
-          }
-        })
-      }else {
+            id: response.id,
+          },
+        });
+      } else {
         await prisma.favorites.create({
-          data: data
-        })
+          data: data,
+        });
       }
 
-      let favorites =  prisma.favorites.findMany({
-        where:{
-          userId: data.userId
+      let favorites = prisma.favorites.findMany({
+        where: {
+          userId: data.userId,
         },
         include: {
-          News: true
-        }
-      })
-      return createResponse(favorites, true, response ? "Remove to favorite successfully": "Add to favorite successfully")
+          News: true,
+        },
+      });
+      return createResponse(
+        favorites,
+        true,
+        response
+          ? "Remove to favorite successfully"
+          : "Add to favorite successfully"
+      );
       // return createResponse(favorites, true, "Opration successfully")
-      
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   },
 
   async getFavoriteByUserId(data) {
     const userExist = await prisma.user.findUnique({
       where: {
-        id: data.userId
-      }
-    })
-    if(!userExist) return createError(404, "User not exist")
+        id: data.userId,
+      },
+    });
+    if (!userExist) return createError(404, "User not exist");
     const favorites = await prisma.favorites.findMany({
       where: {
-        userId: data.userId
+        userId: data.userId,
       },
       include: {
-        News: true
-      }
-    })
-    return {status: true, message: "", data: favorites}
+        News: true,
+      },
+    });
+    return { status: true, message: "", data: favorites };
   },
 
   async searchNews(data) {
@@ -141,58 +158,57 @@ const NewsServices = {
           {
             Title: {
               contains: data.text,
-              mode: "insensitive"
-            }
+              mode: "insensitive",
+            },
           },
           {
             Tagline: {
               contains: data.text,
-              mode: "insensitive"
+              mode: "insensitive",
             },
           },
         ],
       },
       orderBy: {
-        CategoryId: "asc"
+        CategoryId: "asc",
       },
-    })
-    return {status: true, message: "", data: favorites}
+    });
+    return { status: true, message: "", data: favorites };
   },
 
   async searchFav(data) {
     const userExist = await prisma.user.findUnique({
       where: {
-        id: data.userId
-      }
-    })
-    if(!userExist) return createError(404, "User not exist")
+        id: data.userId,
+      },
+    });
+    if (!userExist) return createError(404, "User not exist");
     const favorites = await prisma.favorites.findMany({
       where: {
-       userId: data.userId,
-       News: {
-        OR: [
-          {
-            Title: {
-              contains: data.text,
-              mode: "insensitive"
-            }
-          },
-          {
-            Tagline: {
-              contains: data.text,
-              mode: "insensitive"
+        userId: data.userId,
+        News: {
+          OR: [
+            {
+              Title: {
+                contains: data.text,
+                mode: "insensitive",
+              },
             },
-          },
-        ],
-       }
+            {
+              Tagline: {
+                contains: data.text,
+                mode: "insensitive",
+              },
+            },
+          ],
+        },
       },
       include: {
-        News: true
-      }
-    })
-    return {status: true, message: "", data: favorites}
+        News: true,
+      },
+    });
+    return { status: true, message: "", data: favorites };
   },
-  
 };
 
 module.exports = NewsServices;
