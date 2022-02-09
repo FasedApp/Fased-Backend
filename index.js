@@ -15,7 +15,7 @@ admin.initializeApp({
         privateKey: PRIVATE_KEY?.replace(/\\n/g, '\n'),
         clientEmail: "firebase-adminsdk-ivmjn@fased-01.iam.gserviceaccount.com",
     }),
-    databaseURL: process.env.DATABASE_URL
+    // databaseURL: process.env.DATABASE_URL
 });
 
 const server = new ApolloServer({
