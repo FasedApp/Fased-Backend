@@ -1,6 +1,7 @@
 const { prisma } = require("../database.js");
 require("dotenv").config();
 const { createResponse, createError } = require("../utils/HelperFuntions.js");
+const Notification = require("./NotificationServices.js");
 
 const NewsServices = {
   async CreateNews(data) {
@@ -8,6 +9,14 @@ const NewsServices = {
       const News = await prisma.news.create({
         data: data,
       });
+      const users = await prisma.user.findMany({
+        select: {
+          fcmToken: true
+        }
+      })
+      const tokens = users.map((val) => val?.fcmToken)
+      console.log("CreateNews users", News)
+      await Notification.SendNotificationToMutliUsers( tokens , {screen: 'news'}, News.Title, News.Tagline)
       return {
         data: data,
         status: true,
