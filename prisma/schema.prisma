@@ -41,31 +41,42 @@ model Token {
 }
 
 model Category {
-  id              Int      @id @default(autoincrement())
+  id              Int           @id @default(autoincrement())
   Image           String?
   Title           String?
   Description     String?
   BackgroundColor String?
-  createdAt       DateTime @default(now())
+  createdAt       DateTime      @default(now())
   Report          Report[]
+  SubCategory     SubCategory[]
+}
+
+model SubCategory {
+  id         Int      @id @default(autoincrement())
+  Title      String?
+  createdAt  DateTime @default(now())
+  CategoryId Int
+  Category   Category @relation(fields: [CategoryId], references: [id])
+  Report     Report[]
 }
 
 model Report {
-  id           Int          @id @default(autoincrement())
-  Category     Category     @relation(fields: [CategoryId], references: [id])
-  CategoryId   Int
-  SubCategory  Int?
-  userId       Int
-  latitude     Float
-  longitude    Float
-  IncidentDate DateTime     @default(now())
-  SuspectName  String
-  CostMoney    Int
-  floor        Int?         @default(0)
-  Description  String
-  createdAt    DateTime     @default(now())
-  IncidentTime String?      @default("00:00")
-  FlagReport   FlagReport[]
+  id            Int          @id @default(autoincrement())
+  Category      Category     @relation(fields: [CategoryId], references: [id])
+  CategoryId    Int
+  SubCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
+  userId        Int
+  latitude      Float
+  longitude     Float
+  IncidentDate  DateTime     @default(now())
+  SuspectName   String
+  CostMoney     Int
+  floor         Int?         @default(0)
+  Description   String
+  createdAt     DateTime     @default(now())
+  IncidentTime  String?      @default("00:00")
+  FlagReport    FlagReport[]
+  subCategoryId Int?
 }
 
 model News {

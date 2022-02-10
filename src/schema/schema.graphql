@@ -21,6 +21,16 @@ type Category {
   BackgroundColor: String
   createdAt: Date
   Report: Report
+  SubCategory: SubCategory
+}
+
+type SubCategory {
+  id: Int
+  Title: String
+  createdAt: Date
+  CategoryId: Int
+  Category: Category
+  Report: Report
 }
 
 type Report {
@@ -125,6 +135,12 @@ type CategoryResponse {
   data: Category
 }
 
+type SubCategoryResponse {
+  status: Boolean
+  message: String
+  data: SubCategory
+}
+
 type NewsResponse {
   status: Boolean
   message: String
@@ -155,6 +171,12 @@ type ArrayCategoryResponse {
   data: [Category]
 }
 
+type ArraySubCategoryResponse {
+  status: Boolean
+  message: String
+  data: [SubCategory]
+}
+
 type ArrayNewsResponse {
   status: Boolean
   message: String
@@ -177,6 +199,8 @@ type Query {
   getFavoriteByUserId(userId: Int!): FavoriteResponse
   searchFav(userId: Int!, text: String!): FavoriteResponse
   getCategories: ArrayCategoryResponse
+  getSubCategories: ArraySubCategoryResponse
+  getSubCategoryByCatId(CategoryId: Int!): ArraySubCategoryResponse
 
   getNews: ArrayNewsResponse
   searchNews(text: String!): ArrayNewsResponse
@@ -242,7 +266,7 @@ type Mutation {
 
   deleteReport(id: Int!): ArrayReportResponse
 
-  # REPORT MUTATIONS
+  # CATEGORY MUTATIONS
   CreateCatagory(
     Image: String!
     Title: String!
@@ -259,6 +283,13 @@ type Mutation {
   ): CategoryResponse
 
   deleteCategory(id: Int!): ArrayCategoryResponse
+
+  # SUBCATEGORY MUTATIONS
+  CreateSubCategory(Title: String!, CategoryId: Int!): SubCategoryResponse
+
+  EditSubCategory(id: Int!, Title: String, CategoryId: Int): SubCategoryResponse
+
+  deleteSubCategory(id: Int!): ArraySubCategoryResponse
 
   # NEW MUTATIONS
   CreateNews(

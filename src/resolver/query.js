@@ -42,12 +42,25 @@ const Query = {
     return createResponse(response, true, "all categories");
   },
 
+  // SUBCATEGORY QUERIES
+  getSubCategories: async (args, req) => {
+    const response = await prisma.subCategory.findMany();
+    return createResponse(response, true, "all categories");
+  },
+  getSubCategoryByCatId: async (args, req) => {
+    const response = await prisma.subCategory.findMany({
+      where: {
+        CategoryId:  req?.CategoryId
+      }
+    });
+    return createResponse(response, true, "SubCategories");
+  },
   // NEWS QUERIES
   getNews: async (args, req) => {
     const response = await prisma.news.findMany({
       orderBy: {
-        CategoryId: "asc"
-      }
+        CategoryId: "asc",
+      },
     });
     return createResponse(response, true, "all news");
   },
@@ -64,19 +77,19 @@ const Query = {
     return response;
   },
 
-  getFlagReports:async (args, req) => {
+  getFlagReports: async (args, req) => {
     const response = await prisma.flagReport.findMany({
       include: {
         User: true,
-        Report: true
-      }
-    })
-    return createResponse(response, true, "all reports");;
+        Report: true,
+      },
+    });
+    return createResponse(response, true, "all reports");
   },
 
-  getFlagReasons:async (args, req) => {
-    const response = await prisma.flagReason.findMany()
-    return createResponse(response, true, "all reasons");;
+  getFlagReasons: async (args, req) => {
+    const response = await prisma.flagReason.findMany();
+    return createResponse(response, true, "all reasons");
   },
 };
 

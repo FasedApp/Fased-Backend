@@ -8,6 +8,7 @@ const CategoryServices = require("../services/categoryServices.js");
 const NewsServices = require("../services/NewsServices.js");
 const { createError } = require("../utils/HelperFuntions.js");
 const FlagServices = require("../services/FlagServices.js");
+const SubCategoryServices = require("../services/SubCategoryServices.js");
 
 const Mutation = {
   // AUTH MUTATIONS
@@ -80,6 +81,20 @@ const Mutation = {
     return response;
   },
 
+  // SUBCATEGORY MUTATIONS
+  CreateSubCategory: async (args, req) => {
+    const response = await SubCategoryServices.CreateCatagory(req);
+    return response;
+  },
+  EditSubCategory: async (args, req) => {
+    const response = await SubCategoryServices.EditCategory(req);
+    return response;
+  },
+  deleteSubCategory: async (args, req) => {
+    const response = await SubCategoryServices.deleteCategory(req);
+    return response;
+  },
+
   // News MUTATIONS
   CreateNews: async (args, req) => {
     const response = await NewsServices.CreateNews(req);
@@ -97,7 +112,7 @@ const Mutation = {
     const response = await NewsServices.addToFavorite(req);
     return response;
   },
-  
+
   // FLAG MUTATIONS
   CreateReason: async (args, req) => {
     const response = await FlagServices.CreateReason(req);
