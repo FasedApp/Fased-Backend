@@ -192,6 +192,7 @@ type Mutation {
     registrationType: String!
     name: String
     email: String
+    fcmToken: String
   ): SuccessType
   forgotPassword(email: String!): SuccessType
   OtpVerify_Email(token: String!, email: String!): SuccessType
