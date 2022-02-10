@@ -20,7 +20,7 @@ const NewsServices = {
       const tokens = users.map((val) => val?.fcmToken);
       await Notification.SendNotificationToMutliUsers(
         tokens,
-        JSON.stringify({ screen: "NewsDetails", data: News }),
+        { screen: "NewsDetails", data: JSON.stringify(News) },
         News.Title,
         News.Tagline
       );

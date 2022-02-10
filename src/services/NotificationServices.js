@@ -8,7 +8,7 @@ const Notification = {
     };
     try {
       const result = await admin.messaging().sendMulticast(message);
-      console.log("result SendNotificationToMutliUsers", result);
+      // console.log("result SendNotificationToMutliUsers", result);
     } catch (error) {
       console.log("error  SendNotificationToMutliUsers", error);
     }
