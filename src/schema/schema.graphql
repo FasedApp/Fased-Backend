@@ -38,7 +38,7 @@ type Report {
   userId: Int
   Category: Category
   CategoryId: Int
-  SubCategory: Int
+  subCategoryId: Int
   latitude: Float
   longitude: Float
   IncidentDate: Date
@@ -240,7 +240,7 @@ type Mutation {
   CreateReport(
     userId: Int
     CategoryId: Int!
-    SubCategory: Int
+    subCategoryId: Int
     latitude: Float!
     longitude: Float!
     SuspectName: String!
@@ -254,7 +254,7 @@ type Mutation {
   EditReport(
     id: Int!
     CategoryId: Int
-    SubCategory: Int
+    subCategoryId: Int
     latitude: Float
     longitude: Float
     IncidentDate: Date
