@@ -44,7 +44,12 @@ const Query = {
 
   // SUBCATEGORY QUERIES
   getSubCategories: async (args, req) => {
-    const response = await prisma.subCategory.findMany();
+    const response = await prisma.subCategory.findMany({
+      include: {
+        Category: true,
+        Report: true,
+      }
+    });
     return createResponse(response, true, "all categories");
   },
   getSubCategoryByCatId: async (args, req) => {
