@@ -72,7 +72,7 @@ const ReportServices = {
               },
             },
             {
-              SubCategory: {
+              subCategoryId: {
                 in: data.showIds,
               },
             },
