@@ -44,7 +44,7 @@ type Report {
   IncidentDate: Date
   IncidentTime: String
   SuspectName: String
-  CostMoney: String
+  CostMoney: Int
   floor: Int
   Description: String
   createdAt: Date
@@ -244,7 +244,7 @@ type Mutation {
     latitude: Float!
     longitude: Float!
     SuspectName: String!
-    CostMoney: String!
+    CostMoney: Int!
     IncidentDate: Date!
     IncidentTime: String!
     Description: String!
@@ -259,7 +259,7 @@ type Mutation {
     longitude: Float
     IncidentDate: Date
     SuspectName: String
-    CostMoney: String
+    CostMoney: Int
     Description: String
     floor: Int
   ): ReportReponse

@@ -70,7 +70,7 @@ model Report {
   longitude     Float
   IncidentDate  DateTime     @default(now())
   SuspectName   String
-  CostMoney     String
+  CostMoney     Int
   floor         Int?         @default(0)
   Description   String
   createdAt     DateTime     @default(now())
