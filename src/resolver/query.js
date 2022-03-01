@@ -38,7 +38,11 @@ const Query = {
 
   // CATEGORY QUERIES
   getCategories: async (args, req) => {
-    const response = await prisma.category.findMany();
+    const response = await prisma.category.findMany({
+      orderBy: {
+        id: 'asc'
+      }
+    });
     return createResponse(response, true, "all categories");
   },
 
