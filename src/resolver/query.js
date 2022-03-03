@@ -59,7 +59,10 @@ const Query = {
   getSubCategoryByCatId: async (args, req) => {
     const response = await prisma.subCategory.findMany({
       where: {
-        CategoryId:  req?.CategoryId
+        CategoryId:  req?.CategoryId,
+      },
+      orderBy: {
+        id: true
       }
     });
     return createResponse(response, true, "SubCategories");
