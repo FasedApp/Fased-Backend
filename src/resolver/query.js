@@ -62,7 +62,7 @@ const Query = {
         CategoryId:  req?.CategoryId,
       },
       orderBy: {
-        id: true
+        id: "asc"
       }
     });
     return createResponse(response, true, "SubCategories");
