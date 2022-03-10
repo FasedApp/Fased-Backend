@@ -66,6 +66,14 @@ const FlagServices = {
 
   async CreateFlagReport(data) {
     try {
+      const flagReportExist = await prisma.flagReport.findFirst({
+        where: {
+          userId: data?.userId,
+          reportId: data?.reportId
+        }
+      })
+
+      if (flagReportExist) return createError('409', 'You already flag this report')
       const Report = await prisma.flagReport.create({
         data: data,
         include: {
