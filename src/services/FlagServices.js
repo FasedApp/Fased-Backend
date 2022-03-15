@@ -73,7 +73,7 @@ const FlagServices = {
         }
       })
 
-      if (flagReportExist) return createError('409', 'You already flag this report')
+      if (flagReportExist) return createError('409', 'You already flagged this report')
       const Report = await prisma.flagReport.create({
         data: data,
         include: {
