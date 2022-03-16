@@ -54,7 +54,12 @@ const ReportServices = {
         },
       });
 
-      const reports = await prisma.report.findMany();
+      const reports = await prisma.report.findMany({
+        include:{
+          Category: true,
+          SubCategory: true
+        }
+      });
       return createResponse(reports, true, "Report deleted");
     } catch (error) {
       return createError(401, error);
@@ -79,7 +84,8 @@ const ReportServices = {
           ],
         },
         include: {
-          Category: true
+          Category: true,
+          SubCategory: true
         }
       })
 
@@ -99,7 +105,8 @@ const ReportServices = {
           },
         },
         include: {
-          Category: true
+          Category: true,
+          SubCategory: true
         }
       })
       return createResponse(result, true, "filter categories")
