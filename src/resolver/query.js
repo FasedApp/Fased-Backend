@@ -21,6 +21,7 @@ const Query = {
     const response = await prisma.report.findMany({
       include: {
         Category: true,
+        SubCategory: true
       },
     });
     return createResponse(response, true, "all reports");

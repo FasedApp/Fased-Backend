@@ -1,4 +1,5 @@
 scalar Date
+scalar BigInt
 
 type User {
   id: ID!
@@ -37,6 +38,7 @@ type Report {
   id: Int
   userId: Int
   Category: Category
+  SubCategory: SubCategory
   CategoryId: Int
   subCategoryId: Int
   latitude: Float
@@ -44,7 +46,7 @@ type Report {
   IncidentDate: Date
   IncidentTime: String
   SuspectName: String
-  CostMoney: Int
+  CostMoney: BigInt
   floor: Int
   Description: String
   createdAt: Date
@@ -244,7 +246,7 @@ type Mutation {
     latitude: Float!
     longitude: Float!
     SuspectName: String!
-    CostMoney: Int!
+    CostMoney: BigInt!
     IncidentDate: Date!
     IncidentTime: String!
     Description: String!
@@ -259,7 +261,7 @@ type Mutation {
     longitude: Float
     IncidentDate: Date
     SuspectName: String
-    CostMoney: Int
+    CostMoney: BigInt
     Description: String
     floor: Int
   ): ReportReponse
